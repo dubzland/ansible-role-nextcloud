@@ -36,13 +36,13 @@ dubzland_nextcloud_data_dir: /var/nextcloud/data
 
 Directory where Nextcloud will store user data.
 
-### dubzland_nextcloud_db_host
+### dubzland_nextcloud_db_type
 
 ```yaml
-dubzland_nextcloud_db_host: localhost
+dubzland_nextcloud_db_type: sqlite3
 ```
 
-Host running the database Nextcloud will use.
+Type of database.  Allowed options are `sqlite3`, `pgsql` and `mysql`.
 
 ### dubzland_nextcloud_db_name
 
@@ -52,13 +52,14 @@ dubzland_nextcloud_db_name: nextcloud
 
 Name of the Nextcloud database.  The installation process will create this database if it does not exist.
 
-### dubzland_nextcloud_db_type
+### dubzland_nextcloud_db_host
 
 ```yaml
-dubzland_nextcloud_db_type: pgsql
+dubzland_nextcloud_db_host: localhost
 ```
 
-Type of database.  Allowed options are `pgsql` and `mysql`.
+Host running the database Nextcloud will use.  Only applicable for `pgsql` and
+`mysql` db_type.
 
 ### dubzland_nextcloud_db_username / dubzland_nextcloud_db_password
 
