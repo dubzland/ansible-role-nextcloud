@@ -25,6 +25,7 @@ platforms:
       - /tmp
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /sbin/init
 provisioner:
   name: ansible
   config_options:
