@@ -1,0 +1,75 @@
+- name: ensure Nextcloud is initialized
+  command: >
+    php occ maintenance:install
+    --database {{ dubzland_nextcloud_db_type }}
+    --database-host "{{ dubzland_nextcloud_db_host }}"
+    --database-name {{ dubzland_nextcloud_db_name }}
+    --database-user {{ dubzland_nextcloud_db_username }}
+    --database-pass "{{ dubzland_nextcloud_db_password }}"
+    --admin-user {{ dubzland_nextcloud_admin_username }}
+    --admin-pass {{ dubzland_nextcloud_admin_password }}
+    --data-dir {{ dubzland_nextcloud_data_dir }}
+  args:
+    chdir: "{{ dubzland_nextcloud_root }}"
+    creates: "{{ dubzland_nextcloud_root }}/config/config.php"
+  become: yes
+  become_user: www-data
+  become_method: sudo
+  vars:
+    no_log: True
+    ansible_ssh_pipelining: True
+
+- name: ensure Nextcloud has a minimal configuration
+  nextcloud_config:
+    name: "{{ item.name }}"
+    type: system
+    value: "{{ item.value }}"
+    index: "{{ item.index | default(omit) }}"
+    nextcloud_root: "{{ dubzland_nextcloud_root }}"
+  loop:
+    - name: overwrite.cli.url
+      value: "{{ dubzland_nextcloud_url }}"
+    - name: trusted_domains
+      index: 1
+      value: "{{ dubzland_nextcloud_url | urlsplit('hostname') }}"
+  become: yes
+  become_user: www-data
+  become_method: sudo
+  vars:
+    no_log: True
+    ansible_ssh_pipelining: True
+
+- name: ensure Nextcloud is properly configured
+  nextcloud_config:
+    name: "{{ item.name }}"
+    type: "{{ item.type | default(omit) }}"
+    value: "{{ item.value }}"
+    index: "{{ item.index | default(omit) }}"
+    nextcloud_root: "{{ dubzland_nextcloud_root }}"
+  loop: "{{ dubzland_nextcloud_settings }}"
+  become: yes
+  become_user: www-data
+  become_method: sudo
+  vars:
+    no_log: True
+    ansible_ssh_pipelining: True
+
+# - name: ensure Nextcloud apps are installed
+#   become_user: www-data
+#   command: >
+#     php occ app:install {{ item }}
+#   args:
+#     chdir: "/opt/nextcloud-{{ dubzland_nextcloud_version }}"
+#   vars:
+#     ansible_ssh_pipelining: True
+#   loop: "{{ dubzland_nextcloud_apps }}"
+
+# - name: ensure Nextcloud apps are enabled
+#   become_user: www-data
+#   command: >
+#     php occ app:enable {{ item }}
+#   args:
+#     chdir: "/opt/nextcloud-{{ dubzland_nextcloud_version }}"
+#   vars:
+#     ansible_ssh_pipelining: True
+#   loop: "{{ dubzland_nextcloud_apps }}"

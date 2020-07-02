@@ -1,0 +1,19 @@
+dependencies: []
+
+galaxy_info:
+  role_name: nextcloud
+  author: t3hpr1m3
+  description: Nextcloud for Debian based systems.
+  company: Cedar House Labs
+  license: MIT
+  min_ansible_version: 2.2
+  platforms:
+    - name: Debian
+      versions:
+        - stretch
+        - buster
+
+  galaxy_tags:
+    - cloud
+    - nextcloud
+    - owncloud

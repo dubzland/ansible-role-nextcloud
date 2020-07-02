@@ -1,0 +1,4 @@
+---
+- import_tasks: variables.yml
+- import_tasks: packages.yml
+- import_tasks: configuration.yml

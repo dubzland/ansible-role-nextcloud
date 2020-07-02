@@ -1,0 +1,29 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: create required man directories
+      file:
+        path: "/usr/share/man/man{{ item }}"
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+      loop: [1, 2, 3, 4, 5, 6, 7, 8]
+      when: ansible_distribution_release == "stretch"
+    - name: update the apt cache/install postgres
+      package:
+        name: "{{ item }}"
+        update_cache: true
+      loop:
+        - man
+        - postgresql
+    - name: ensure postgresql is running
+      service:
+        name: postgresql
+        enabled: yes
+        state: started
+    - name: create the nextcloud user
+      command: psql -c "CREATE USER nextcloud WITH PASSWORD 'nextcloud' CREATEDB"
+      become: yes
+      become_user: postgres
