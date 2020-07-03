@@ -12,7 +12,7 @@
     state: directory
     owner: "{{ dubzland_nextcloud_web_user }}"
     group: "{{ dubzland_nextcloud_web_group }}"
-    mode: 0755
+    mode: 0750
 
 - name: ensure the Nextcloud root directory exists
   file:
@@ -20,7 +20,7 @@
     state: directory
     owner: "{{ dubzland_nextcloud_web_user }}"
     group: "{{ dubzland_nextcloud_web_group }}"
-    mode: 0755
+    mode: 0750
 
 - name: ensure the Nextcloud archive is available
   get_url:

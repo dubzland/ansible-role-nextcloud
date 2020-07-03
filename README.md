@@ -31,7 +31,7 @@ Root directory to contain the Nextcloud install.
 ### dubzland_nextcloud_data_dir
 
 ```yaml
-dubzland_nextcloud_data_dir: /var/nextcloud/data
+dubzland_nextcloud_data_dir: "{{ dubzland_nextcloud_root }}/data"
 ```
 
 Directory where Nextcloud will store user data.

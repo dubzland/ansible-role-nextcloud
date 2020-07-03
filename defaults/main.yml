@@ -1,7 +1,7 @@
 ---
 dubzland_nextcloud_version: 19.0.0
 dubzland_nextcloud_root: "/opt/nextcloud-{{ dubzland_nextcloud_version }}"
-dubzland_nextcloud_data_dir: /var/nextcloud/data
+dubzland_nextcloud_data_dir: "{{ dubzland_nextcloud_root }}/data"
 
 dubzland_nextcloud_db_type: sqlite3
 
