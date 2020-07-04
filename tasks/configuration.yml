@@ -54,6 +54,7 @@
         appname: "{{ item.0.name }}"
         nextcloud_root: "{{ dubzland_nextcloud_root }}"
       loop: "{{ dubzland_nextcloud_apps | subelements('settings') }}"
+      when: item.0.state == 'present'
 
   become: yes
   become_user: "{{ dubzland_nextcloud_web_user }}"
