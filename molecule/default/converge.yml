@@ -11,21 +11,16 @@
         name: "ansible-role-nextcloud"
       vars:
         dubzland_nextcloud_settings:
+          - name: filelocking.enabled
+            value: True
           - name: memcache.local
-            type: system
             value: "\\OC\\Memcache\\APCu"
           - name: memcache.distributed
-            type: system
-            value: '\OC\Memcache\Memcached'
-          - name: memcached_servers
-            type: system
-            value:
-              - ['localhost', 11211]
+            value: '\OC\Memcache\Redis'
           - name: redis
-            type: system
             value:
-              host: "/var/run/redis/redis.sock"
-              port: 0
+              host: "localhost"
+              port: 6379
               timeout: "0.0"
         dubzland_nextcloud_apps:
           - name: maps
