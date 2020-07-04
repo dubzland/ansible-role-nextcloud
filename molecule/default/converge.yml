@@ -9,3 +9,28 @@
     - name: "Include ansible-role-nextcloud"
       include_role:
         name: "ansible-role-nextcloud"
+      vars:
+        dubzland_nextcloud_settings:
+          - name: memcache.local
+            type: system
+            value: "\\OC\\Memcache\\APCu"
+          - name: memcache.distributed
+            type: system
+            value: '\OC\Memcache\Memcached'
+          - name: memcached_servers
+            type: system
+            value:
+              - ['localhost', 11211]
+          - name: redis
+            type: system
+            value:
+              host: "/var/run/redis/redis.sock"
+              port: 0
+              timeout: "0.0"
+        dubzland_nextcloud_apps:
+          - name: maps
+            state: present
+            settings:
+              - name: homepage
+                state: absent
+                value: 'http://www.google.com'
