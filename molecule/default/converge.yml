@@ -15,13 +15,6 @@
             value: True
           - name: memcache.local
             value: "\\OC\\Memcache\\APCu"
-          - name: memcache.distributed
-            value: '\OC\Memcache\Redis'
-          - name: redis
-            value:
-              host: "localhost"
-              port: 6379
-              timeout: "0.0"
         dubzland_nextcloud_apps:
           - name: maps
             state: present
