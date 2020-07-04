@@ -3,6 +3,7 @@ dubzland_nextcloud_prerequisites:
   - bzip2
   - ffmpeg
   - libxml2
+  - imagemagick
   - php7.0-fpm
   - php7.0-bz2
   - php7.0-ctype
