@@ -1,38 +1,33 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 # Copyright: (c) 2019, Josh Williams <vmizzle@gmail.com>
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
-
-from __future__ import absolute_import, division, print_function
-import json
-__metaclass__ = type
 
 ANSIBLE_METADATA = {'metadata_version': '1.1',
                     'status': ['preview'],
                     'supported_by': 'community'}
 
-DOCUMENTATION = '''
+DOCUMENTATION = r'''
 ---
 module: nextcloud_app
-
 short_description: Adds (or removes) Nextcloud apps.
-
 description:
-    - "Adds or removes apps from Nextcloud.
+    - Adds, removes, enables and disables apps in Nextcloud.
 
 options:
     name:
         required: true
         description:
-            - Name of the app
+            - Name of the app to be installed/removed
     state:
-        choices: ["present", "absent"]
-        default: "present"
+        choices: ['present', 'absent']
+        default: 'present'
         description:
             - Whether the app should be present or absent.
     enabled:
-        choices: ["yes", "no"]
-        default: "yes"
+        choices: ['yes', 'no']
+        default: 'yes'
         description:
             - Whether or not the app should be enabled within Nextcloud
     nextcloud_root:
@@ -42,6 +37,7 @@ options:
 '''
 
 from ansible.module_utils.basic import AnsibleModule
+import json
 
 class NextcloudApp(object):
     def __init__(self, module):
@@ -51,43 +47,96 @@ class NextcloudApp(object):
         self.enabled        = module.params['enabled']
         self.nextcloud_root = module.params['nextcloud_root']
 
-    def exec_cmd(self, cmd):
+        self._apps          = None
+
+    def _exec_cmd(self, cmd):
         return self.module.run_command(cmd, cwd=self.nextcloud_root)
 
-    def get_app_list(self):
-        (rc, out, err) = self.exec_cmd("php occ app:list --output=json")
+    def _all_apps(self):
+        if self._apps is not None:
+            return self._apps
+
+        (rc, out, err) = self._exec_cmd("php occ app:list --output=json")
         if rc != 0:
-            return self.module.fail_json(name=self.name, msg=err)
+            self.module.fail_json(
+                    name=self.name,
+                    msg='Error getting app list.',
+                    rc=rc,
+                    err=err)
 
-        self.apps = json.loads(out)
+        self._apps = json.loads(out)
+        return self._apps
 
-        return (rc, out, err)
+    def _is_installed(self):
+        apps = self._all_apps()
+        return ((self.name in apps['enabled']) or (self.name in apps['disabled']))
 
-    def is_installed(self):
-        return ((self.name in self.apps['enabled']) or (self.name in
-            self.apps['disabled']))
-
-    def is_enabled(self):
-        if self.is_installed:
-            return self.name in self.apps['enabled']
+    def _is_enabled(self):
+        if self._is_installed():
+            apps = self._all_apps()
+            return self.name in apps['enabled']
         else:
             return False
 
     def install(self):
-        thecmd = "php occ app:install %s" % self.name
-        return self.exec_cmd(thecmd)
+        if self._is_installed():
+            return (False, '', '')
+        else:
+            thecmd = "php occ app:install %s" % self.name
+            (rc, out, err) = self._exec_cmd(thecmd)
+            if rc != 0:
+                self.module.fail_json(
+                        name=self.name,
+                        msg='Error installing app.',
+                        rc=rc,
+                        err=err)
+
+            return (True, out, err)
 
     def remove(self):
-        thecmd = "php occ app:remove %s" % self.name
-        return self.exec_cmd(thecmd)
+        if self._is_installed():
+            thecmd = "php occ app:remove %s" % self.name
+            (rc, out, err) = self._exec_cmd(thecmd)
+            if rc != 0:
+                self.module.fail_json(
+                        name=self.name,
+                        msg='Error removing app.',
+                        rc=rc,
+                        err=err)
+
+            return (True, out, err)
+        else:
+            return (False, '', '')
 
     def enable(self):
-        thecmd = "php occ app:enable %s" % self.name
-        return self.exec_cmd(thecmd)
+        if self._is_enabled():
+            return (False, '', '')
+        else:
+            thecmd = "php occ app:enable %s" % self.name
+            (rc, out, err) = self._exec_cmd(thecmd)
+            if rc != 0:
+                self.module.fail_json(
+                        name=self.name,
+                        msg='Error enabling app.',
+                        rc=rc,
+                        err=err)
+
+            return (True, out, err)
 
     def disable(self):
-        thecmd = "php occ app:disable %s" % self.name
-        return self.exec_cmd(thecmd)
+        if self._is_enabled():
+            thecmd = "php occ app:disable %s" % self.name
+            (rc, out, err) = self._exec_cmd(thecmd)
+            if rc != 0:
+                self.module.fail_json(
+                        name=self.name,
+                        msg='Error disabling app.',
+                        rc=rc,
+                        err=err)
+
+            return (True, out, err)
+        else:
+            return (False, '', '')
 
 def main():
     module = AnsibleModule(
@@ -101,61 +150,28 @@ def main():
     )
 
     app = NextcloudApp(module)
-    rc = 0
+
+    result = {}
+    installed = False
+    enabled = False
     out = ''
     err = ''
-    result = {}
+
     result['name'] = app.name
     result['state'] = app.state
-
-    (rc, out, err) = app.get_app_list()
-    if rc != 0:
-        msg = "rc: %s, err: [%s], out: [%s]" % (rc, err, out)
-        module.fail_json(name=setting.name, msg=err)
+    result['enabled'] = app.enabled
 
     if app.state == 'absent':
-        if app.is_installed():
-            if module.check_mode:
-                module.exit_json(changed=True)
-            else:
-                (rc, out, err) = app.remove()
-                if rc != 0:
-                    module.fail_json(name=app.name, msg=err)
-        else:
-            module.exit_json(changed=False)
+        (installed, out, err) = app.remove()
     else:
-        if app.is_installed():
-            if app.enabled:
-                if app.is_enabled():
-                    rc = None
-                else:
-                    (rc, out, err) = app.enable()
-                    if rc != 0:
-                        module.fail_json(name=app.name, msg=err)
-            else:
-                if app.is_enabled():
-                    (rc, out, err) = app.disable()
-                    if rc != 0:
-                        module.fail_json(name=app.name, msg=err)
-                else:
-                    rc = None
+        (installed, out, err) = app.install()
+
+        if app.enabled:
+            (enabled, out, err) = app.enable()
         else:
-            (rc, out, err) = app.install()
-            if rc != 0:
-                module.fail_json(name=app.name, msg=err)
+            (enabled, out, err) = app.disable()
 
-            if not app.enabled:
-                (rc, out, err) = app.disable()
-                if rc != 0:
-                    module.fail_json(name=app.name, msg=err)
-
-    if rc is not None and rc != 0:
-        module.fail_json(name=app.name, msg=err)
-
-    if rc is None:
-        result['changed'] = False
-    else:
-        result['changed'] = True
+    result['changed'] = installed or enabled
 
     if out:
         result['stdout'] = out
