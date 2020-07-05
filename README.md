@@ -1,6 +1,7 @@
 # Dubzland: Nextcloud
 [![Gitlab pipeline status (self-hosted)](https://img.shields.io/gitlab/pipeline/dubzland/ansible-role-nextcloud/main?gitlab_url=https%3A%2F%2Fgit.dubzland.net)](https://git.dubzland.net/dubzland/ansible-role-nextcloud/pipelines)
 [![Ansible role downloads](https://img.shields.io/ansible/role/d/49600)](https://galaxy.ansible.com/dubzland/nextcloud)
+[![Ansible Quality Score](https://img.shields.io/ansible/quality/49600)](https://galaxy.ansible.com/dubzland/nextcloud)
 
 Installs and configures the Nextcloud personal cloud.
 
