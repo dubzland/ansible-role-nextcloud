@@ -7,7 +7,7 @@ Installs and configures the Nextcloud personal cloud.
 
 ## Requirements
 
-Ansible version 2.0 or higher.
+None
 
 ## Role Variables
 
@@ -20,7 +20,7 @@ Available variables are listed below, along with their default values (see
 dubzland_nextcloud_version: 19.0.0
 ```
 
-Version of Nextcloud to install
+Version of Nextcloud to install.
 
 ### dubzland_nextcloud_root
 
@@ -44,6 +44,8 @@ Directory where Nextcloud will store user data.
 dubzland_nextcloud_db_type: sqlite3
 ```
 
+Type of database.  Allowed options are `sqlite3`, `pgsql` and `mysql`.
+
 ### dubzland_nextcloud_db_host
 
 ```yaml
@@ -52,8 +54,6 @@ dubzland_nextcloud_db_host: localhost
 
 Host running the database Nextcloud will use.  Only applicable for `pgsql` and
 `mysql` db_type.
-
-Type of database.  Allowed options are `sqlite3`, `pgsql` and `mysql`.
 
 ### dubzland_nextcloud_db_name
 
@@ -105,8 +105,17 @@ URL where to Nextcloud instance will be accessible.
 dubzland_nextcloud_settings: []
 ```
 
-Any additional settings to configure (mail server, etc).  This will be an array
-of `key`: `value` dicts.
+Any additional settings to configure (mail server, etc).  See
+`defaults/main.yml` for examples.
+
+### dubzland_nextcloud_apps
+
+```yaml
+dubzland_nextcloud_apps: []
+```
+
+Any apps (and their settings) to automatically configure in Nextcloud.  See
+`defaults/main.yml` for examples.
 
 ## Dependencies
 
