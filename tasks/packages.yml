@@ -1,10 +1,9 @@
 ---
 - name: ensure Nextcloud prerequisites are installed
   package:
-    name: "{{ item }}"
+    name: "{{ dubzland_nextcloud_prerequisites }}"
     state: present
-    install_recommends: False
-  loop: "{{ dubzland_nextcloud_prerequisites }}"
+    install_recommends: no
 
 - name: ensure the Nextcloud data directory exists
   file:
@@ -22,17 +21,13 @@
     group: "{{ dubzland_nextcloud_web_group }}"
     mode: 0750
 
-- name: ensure the Nextcloud archive is available
-  get_url:
-    url: "{{ dubzland_nextcloud_download_url }}"
-    dest: "/tmp/nextcloud-{{ dubzland_nextcloud_version }}.tar.bz2"
-
 - name: ensure the Nextcloud archive is unpacked
   unarchive:
-    src: "/tmp/nextcloud-{{ dubzland_nextcloud_version }}.tar.bz2"
+    src: "{{ dubzland_nextcloud_download_url }}"
     dest: "{{ dubzland_nextcloud_root }}"
     remote_src: yes
     extra_opts:
       - "--strip-components=1"
     owner: "{{ dubzland_nextcloud_web_user }}"
     group: "{{ dubzland_nextcloud_web_group }}"
+    creates: "{{ dubzland_nextcloud_root }}/config/config.sample.php"
