@@ -29,4 +29,3 @@ dubzland_nextcloud_prerequisites:
   - php-apcu
 
 dubzland_nextcloud_download_url: "https://download.nextcloud.com/server/releases/nextcloud-{{ dubzland_nextcloud_version }}.tar.bz2"
-
