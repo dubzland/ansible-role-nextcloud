@@ -7,5 +7,6 @@ services:
 molecule:
   stage: test
   script:
-    - ansible --version
-    - molecule test --all
+    - pip3 install tox
+    - tox --version
+    - tox
