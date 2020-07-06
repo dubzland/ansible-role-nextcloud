@@ -1,5 +1,5 @@
 ---
-dubzland_nextcloud_version: 19.0.0
+dubzland_nextcloud_version: "{{ _dubzland_nextcloud_version }}"
 dubzland_nextcloud_root: "/var/www/nextcloud"
 dubzland_nextcloud_data_dir: "/srv/nextcloud/data"
 

@@ -2,17 +2,13 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: Override the version for Debian Stretch
-      set_fact:
-        dubzland_nextcloud_version: 15.0.14
-      when: ansible_distribution_release == "stretch"
     - name: "Include ansible-role-nextcloud"
       include_role:
         name: "ansible-role-nextcloud"
       vars:
         dubzland_nextcloud_settings:
           - name: filelocking.enabled
-            value: True
+            value: 'true'
           - name: memcache.local
             value: "\\OC\\Memcache\\APCu"
         dubzland_nextcloud_apps:

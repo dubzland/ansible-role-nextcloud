@@ -6,5 +6,6 @@
       files:
         - "{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml"
         - "{{ ansible_distribution }}.yml"
+        - "default.yml"
       paths:
         - "{{ role_path }}/vars"

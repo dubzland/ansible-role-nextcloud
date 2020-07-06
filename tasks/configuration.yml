@@ -25,8 +25,7 @@
         - name: overwrite.cli.url
           value: "{{ dubzland_nextcloud_url }}"
         - name: trusted_domains
-          value:
-            - "{{ dubzland_nextcloud_url | urlsplit('hostname') }}"
+          value: "{{ dubzland_nextcloud_url | urlsplit('hostname') }}"
 
     - name: ensure Nextcloud is properly configured
       nextcloud_setting:

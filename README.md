@@ -17,10 +17,12 @@ Available variables are listed below, along with their default values (see
 ### dubzland_nextcloud_version
 
 ```yaml
-dubzland_nextcloud_version: 19.0.0
+dubzland_nextcloud_version: "{{ _dubzland_nextcloud_version }}"
 ```
 
-Version of Nextcloud to install.
+Version of Nextcloud to install.  Defaults to the most recent version of
+Nextcloud compatible with the version of PHP available in the platform's package
+manager.
 
 ### dubzland_nextcloud_root
 
