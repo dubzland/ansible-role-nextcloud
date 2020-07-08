@@ -2,6 +2,8 @@
 [![Gitlab pipeline status (self-hosted)](https://img.shields.io/gitlab/pipeline/dubzland/ansible-role-nextcloud/main?gitlab_url=https%3A%2F%2Fgit.dubzland.net)](https://git.dubzland.net/dubzland/ansible-role-nextcloud/pipelines)
 [![Ansible role downloads](https://img.shields.io/ansible/role/d/49600)](https://galaxy.ansible.com/dubzland/nextcloud)
 [![Ansible Quality Score](https://img.shields.io/ansible/quality/49600)](https://galaxy.ansible.com/dubzland/nextcloud)
+[![Liberapay patrons](https://img.shields.io/liberapay/patrons/jdubz)](https://liberapay.com/jdubz/donate)
+[![Liberapay receiving](https://img.shields.io/liberapay/receives/jdubz)](https://liberapay.com/jdubz/donate)
 
 Installs and configures the Nextcloud personal cloud.
 
@@ -138,4 +140,4 @@ MIT
 
 ## Author
 
-* [Josh Williams](https://codingprime.com)
+* [Josh Williams](https://dubzland.net)
