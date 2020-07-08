@@ -1,9 +1,10 @@
+---
 - name: configure Nextcloud
   block:
     - name: ensure Nextcloud is initialized
       command: >
         php occ maintenance:install
-        --database {{ 'sqlite' if (dubzland_nextcloud_db_type == 'sqlite3') else dubzland_nextcloud_db_type }}
+        --database {{ dubzland_nextcloud_db_type | replace('lite3', 'lite') }}
         --database-host "{{ dubzland_nextcloud_db_host }}"
         --database-name {{ dubzland_nextcloud_db_name }}
         --database-user {{ dubzland_nextcloud_db_username }}
@@ -55,9 +56,9 @@
       loop: "{{ dubzland_nextcloud_apps | subelements('settings') }}"
       when: item.0.state == 'present'
 
-  become: yes
+  become: true
   become_user: "{{ dubzland_nextcloud_web_user }}"
   become_method: sudo
-  no_log: True
+  no_log: true
   vars:
-    ansible_ssh_pipelining: True
+    ansible_ssh_pipelining: true

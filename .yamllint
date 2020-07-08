@@ -1,0 +1,9 @@
+---
+extends: default
+ignore: |
+  .tox/
+
+rules:
+  line-length:
+    ignore: |
+      /vars/main.yml

@@ -6,8 +6,8 @@ driver:
 platforms:
   - name: dubzland-nextcloud-debian9
     image: jdubz/docker-ci-debian:stretch-slim
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /run
       - /run/lock
@@ -15,8 +15,8 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: dubzland-nextcloud-debian10
     image: jdubz/docker-ci-debian:buster-slim
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /run
       - /run/lock
@@ -25,8 +25,8 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: dubzland-nextcloud-ubuntu16.04
     image: jdubz/docker-ci-ubuntu:xenial
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /run
       - /run/lock
@@ -35,8 +35,8 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: dubzland-nextcloud-ubuntu18.04
     image: jdubz/docker-ci-ubuntu:bionic
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /run
       - /run/lock
@@ -45,8 +45,8 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: dubzland-nextcloud-ubuntu19.10
     image: jdubz/docker-ci-ubuntu:eoan
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /run
       - /run/lock
@@ -55,8 +55,8 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: dubzland-nextcloud-ubuntu20.04
     image: jdubz/docker-ci-ubuntu:focal
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /run
       - /run/lock
@@ -65,8 +65,8 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: dubzland-nextcloud-ubuntu20.10
     image: jdubz/docker-ci-ubuntu:groovy
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /run
       - /run/lock
@@ -77,3 +77,7 @@ provisioner:
   name: ansible
 verifier:
   name: ansible
+lint: |
+  set -e
+  yamllint .
+  ansible-lint

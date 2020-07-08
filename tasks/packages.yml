@@ -3,7 +3,7 @@
   package:
     name: "{{ dubzland_nextcloud_prerequisites }}"
     state: present
-    install_recommends: no
+    install_recommends: true
 
 - name: ensure the Nextcloud data directory exists
   file:
@@ -25,7 +25,7 @@
   unarchive:
     src: "{{ dubzland_nextcloud_download_url }}"
     dest: "{{ dubzland_nextcloud_root }}"
-    remote_src: yes
+    remote_src: true
     extra_opts:
       - "--strip-components=1"
     owner: "{{ dubzland_nextcloud_web_user }}"

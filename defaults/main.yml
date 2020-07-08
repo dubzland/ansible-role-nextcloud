@@ -31,13 +31,13 @@ dubzland_nextcloud_url: https://nextcloud.example.com
 #       port: 6379
 dubzland_nextcloud_settings: []
 
-#dubzland_nextcloud_apps:
-# - name: theming
-#   state: present
-#   enabled: no
-#   settings:
-#     - name: color
-#       value: #0e75ac
-# - name: maps
-#   state: absent
+# dubzland_nextcloud_apps:
+#  - name: theming
+#    state: present
+#    enabled: no
+#    settings:
+#      - name: color
+#        value: #0e75ac
+#  - name: maps
+#    state: absent
 dubzland_nextcloud_apps: []
