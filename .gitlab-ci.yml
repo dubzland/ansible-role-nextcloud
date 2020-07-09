@@ -17,4 +17,4 @@ molecule:
     - pip3 install tox
     - tox --version
   script:
-    - tox -e py27-ansible28,py27-ansible29
+    - tox
