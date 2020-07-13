@@ -153,7 +153,7 @@ class NextcloudSetting(object):
                     d['apps'][self.appname][self.name] = self.value
 
                 handle, filename = tempfile.mkstemp(prefix='nextcloud_setting')
-                with os.fdopen(handle, "wb") as f:
+                with os.fdopen(handle, "w") as f:
                     json.dump(d, f)
                     f.close()
 
