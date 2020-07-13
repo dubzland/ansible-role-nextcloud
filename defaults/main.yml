@@ -17,6 +17,9 @@ dubzland_nextcloud_web_user: www-data
 dubzland_nextcloud_web_group: www-data
 
 dubzland_nextcloud_url: https://nextcloud.example.com
+dubzland_nextcloud_trusted_domains:
+  - localhost
+  - example.com
 
 # dubzland_nextcloud_settings:
 #   - name: mail_domain

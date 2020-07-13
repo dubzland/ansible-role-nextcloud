@@ -102,6 +102,16 @@ dubzland_nextcloud_url: https://nextcloud.example.com
 
 URL where to Nextcloud instance will be accessible.
 
+### dubzland_nextcloud_trusted_domains
+
+```yaml
+dubzland_nextcloud_trusted_domains:
+  - localhost
+  - nextcloud.example.com
+```
+
+List of domains allowed to connect to this Nextcloud instance.
+
 
 ### dubzland_nextcloud_settings
 
@@ -110,7 +120,7 @@ dubzland_nextcloud_settings: []
 ```
 
 Any additional settings to configure (mail server, etc).  See
-`defaults/main.yml` for examples.
+[defaults/main.yml](defaults/main.yml) for examples.
 
 ### dubzland_nextcloud_apps
 
@@ -119,7 +129,7 @@ dubzland_nextcloud_apps: []
 ```
 
 Any apps (and their settings) to automatically configure in Nextcloud.  See
-`defaults/main.yml` for examples.
+[defaults/main.yml](defaults/main.yml) for examples.
 
 ## Dependencies
 
