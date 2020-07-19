@@ -3,7 +3,7 @@
   package:
     name: "{{ dubzland_nextcloud_prerequisites }}"
     state: present
-    install_recommends: true
+    install_recommends: false
 
 - name: ensure the Nextcloud data directory exists
   file:

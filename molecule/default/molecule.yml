@@ -11,7 +11,6 @@ platforms:
     tmpfs:
       - /run
       - /run/lock
-      - /var/cache/apt
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: dubzland-nextcloud-debian10
@@ -22,7 +21,6 @@ platforms:
       - /run
       - /run/lock
       - /tmp
-      - /var/cache/apt
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: dubzland-nextcloud-ubuntu16.04
@@ -33,7 +31,6 @@ platforms:
       - /run
       - /run/lock
       - /tmp
-      - /var/cache/apt
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: dubzland-nextcloud-ubuntu18.04
@@ -44,7 +41,6 @@ platforms:
       - /run
       - /run/lock
       - /tmp
-      - /var/cache/apt
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: dubzland-nextcloud-ubuntu19.10
@@ -54,7 +50,6 @@ platforms:
     tmpfs:
       - /run
       - /run/lock
-      - /var/cache/apt
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: dubzland-nextcloud-ubuntu20.04
@@ -65,7 +60,6 @@ platforms:
       - /run
       - /run/lock
       - /tmp
-      - /var/cache/apt
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: dubzland-nextcloud-ubuntu20.10
@@ -76,7 +70,6 @@ platforms:
       - /run
       - /run/lock
       - /tmp
-      - /var/cache/apt
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:

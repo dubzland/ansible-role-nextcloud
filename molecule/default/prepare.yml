@@ -2,6 +2,6 @@
 - name: Prepare
   hosts: all
   tasks:
-    - name: update the apt cache
+    - name: update the package cache
       package:
         update_cache: true
