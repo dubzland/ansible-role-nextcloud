@@ -47,7 +47,7 @@
       register: app_install_result
       until: app_install_result | succeeded
       retries: 10
-      wait: 10
+      delay: 10
 
     - name: ensure Nextcloud apps are configured
       nextcloud_setting:
