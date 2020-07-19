@@ -45,9 +45,9 @@
         nextcloud_root: "{{ dubzland_nextcloud_root }}"
       loop: "{{ dubzland_nextcloud_apps }}"
       register: app_install_result
-      until: app_install_result | succeeded
+      until: app_install_result is succeeded
       retries: 10
-      delay: 10
+      delay: 20
 
     - name: ensure Nextcloud apps are configured
       nextcloud_setting:
@@ -63,6 +63,6 @@
   become: true
   become_user: "{{ dubzland_nextcloud_web_user }}"
   become_method: sudo
-  no_log: true
+  # no_log: true
   vars:
     ansible_ssh_pipelining: true
