@@ -62,7 +62,8 @@ class NextcloudApp(object):
                     name=self.name,
                     msg='Error getting app list.',
                     rc=rc,
-                    err=err)
+                    stdout=out,
+                    stderr=err)
 
         self._apps = json.loads(out)
         return self._apps
@@ -82,7 +83,7 @@ class NextcloudApp(object):
         if self._is_installed():
             return (False, '', '')
         else:
-            thecmd = "php occ app:install -vvv %s" % self.name
+            thecmd = "php occ app:install %s" % self.name
             (rc, out, err) = self._exec_cmd(thecmd)
             if rc != 0:
                 self.module.fail_json(
