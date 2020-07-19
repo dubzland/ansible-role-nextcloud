@@ -82,7 +82,7 @@ class NextcloudApp(object):
         if self._is_installed():
             return (False, '', '')
         else:
-            thecmd = "php occ app:install %s" % self.name
+            thecmd = "php occ app:install -vvv %s" % self.name
             (rc, out, err) = self._exec_cmd(thecmd)
             if rc != 0:
                 self.module.fail_json(

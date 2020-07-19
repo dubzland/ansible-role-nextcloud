@@ -59,6 +59,6 @@
   become: true
   become_user: "{{ dubzland_nextcloud_web_user }}"
   become_method: sudo
-  no_log: true
+  # no_log: true
   vars:
     ansible_ssh_pipelining: true
