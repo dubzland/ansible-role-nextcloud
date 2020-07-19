@@ -89,7 +89,8 @@ class NextcloudApp(object):
                         name=self.name,
                         msg='Error installing app.',
                         rc=rc,
-                        err=err)
+                        stdout=out,
+                        stderr=err)
 
             return (True, out, err)
 
@@ -102,7 +103,8 @@ class NextcloudApp(object):
                         name=self.name,
                         msg='Error removing app.',
                         rc=rc,
-                        err=err)
+                        stdout=out,
+                        stderr=err)
 
             return (True, out, err)
         else:
@@ -119,7 +121,8 @@ class NextcloudApp(object):
                         name=self.name,
                         msg='Error enabling app.',
                         rc=rc,
-                        err=err)
+                        stdout=out,
+                        stderr=err)
 
             return (True, out, err)
 
@@ -132,7 +135,8 @@ class NextcloudApp(object):
                         name=self.name,
                         msg='Error disabling app.',
                         rc=rc,
-                        err=err)
+                        stdout=out,
+                        stderr=err)
 
             return (True, out, err)
         else:
