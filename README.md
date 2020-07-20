@@ -94,6 +94,14 @@ dubzland_nextcloud_web_group: www-data
 
 System user who should own all Nextcloud application and data files.
 
+### dubzland_nextcloud_cron_frequency
+
+```yaml
+dubzland_nextcloud_cron_frequency: '5'
+```
+
+How many minutes should elapse between running the cron maintenance job.
+
 ### dubzland_nextcloud_url
 
 ```yaml

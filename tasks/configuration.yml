@@ -66,3 +66,10 @@
   no_log: true
   vars:
     ansible_ssh_pipelining: true
+
+- name: ensure cron job is configured
+  cron:
+    name: 'Nextcloud maintenance'
+    minute: "/{{ dubzland_nextcloud_cron_frequency }}"
+    job: "php -f {{ dubzland_nextcloud_root }}/cron.php"
+    user: "{{ dubzland_nextcloud_web_user }}"
