@@ -1,6 +1,7 @@
 ---
 dubzland_nextcloud_prerequisites:
   - bzip2
+  - cron
   - ffmpeg
   - libxml2
   - imagemagick
