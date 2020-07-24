@@ -16,6 +16,8 @@ dubzland_nextcloud_admin_password: nextcloud
 dubzland_nextcloud_web_user: www-data
 dubzland_nextcloud_web_group: www-data
 
+dubzland_nextcloud_cron_frequency: '5'
+
 dubzland_nextcloud_url: https://nextcloud.example.com
 dubzland_nextcloud_trusted_domains:
   - localhost
