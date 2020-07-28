@@ -7,14 +7,55 @@ services:
 variables:
   BASH_ENV: /root/.bashrc
 
-molecule:
+.molecule:
   stage: test
   cache:
     paths:
       - .tox
   before_script:
-    - pip install tox tox-pyenv
     - pyenv local 2.7.18 3.6.11 3.7.7 3.8.3
-    - tox --version
+    - pip3 install tox
   script:
     - tox
+
+debian9:
+  extends: .molecule
+  variables:
+    MOLECULE_PLATFORM: debian-stretch
+    MOLECULE_IMAGE: debian:stretch-slim
+
+debian10:
+  extends: .molecule
+  variables:
+    MOLECULE_PLATFORM: debian-buster
+    MOLECULE_IMAGE: debian:buster-slim
+
+ubuntu1604:
+  extends: .molecule
+  variables:
+    MOLECULE_PLATFORM: ubuntu-xenial
+    MOLECULE_IMAGE: ubuntu:xenial
+
+ubuntu1804:
+  extends: .molecule
+  variables:
+    MOLECULE_PLATFORM: ubuntu-bionic
+    MOLECULE_IMAGE: ubuntu:bionic
+
+ubuntu1910:
+  extends: .molecule
+  variables:
+    MOLECULE_PLATFORM: ubuntu-eoan
+    MOLECULE_IMAGE: ubuntu:eoan
+
+ubuntu2004:
+  extends: .molecule
+  variables:
+    MOLECULE_PLATFORM: ubuntu-focal
+    MOLECULE_IMAGE: ubuntu:focal
+
+ubuntu2010:
+  extends: .molecule
+  variables:
+    MOLECULE_PLATFORM: ubuntu-groovy
+    MOLECULE_IMAGE: ubuntu:groovy
