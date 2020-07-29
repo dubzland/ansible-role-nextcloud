@@ -13,6 +13,13 @@ galaxy_info:
       versions:
         - stretch
         - buster
+    - name: Ubuntu
+      versions:
+        - xenial
+        - bionic
+        - eoan
+        - focal
+        - groovy
 
   galaxy_tags:
     - cloud
