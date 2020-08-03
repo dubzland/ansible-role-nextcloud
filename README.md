@@ -1,5 +1,6 @@
 # Dubzland: Nextcloud
 [![Gitlab pipeline status (self-hosted)](https://img.shields.io/gitlab/pipeline/dubzland/ansible-role-nextcloud/main?gitlab_url=https%3A%2F%2Fgit.dubzland.net)](https://git.dubzland.net/dubzland/ansible-role-nextcloud/pipelines)
+[![Ansible role](https://img.shields.io/ansible/role/49600)](https://galaxy.ansible.com/dubzland/gitlab)
 [![Ansible role downloads](https://img.shields.io/ansible/role/d/49600)](https://galaxy.ansible.com/dubzland/nextcloud)
 [![Ansible Quality Score](https://img.shields.io/ansible/quality/49600)](https://galaxy.ansible.com/dubzland/nextcloud)
 [![Liberapay patrons](https://img.shields.io/liberapay/patrons/jdubz)](https://liberapay.com/jdubz/donate)
@@ -149,7 +150,7 @@ None.
 - hosts: nextcloud
   become: yes
   roles:
-    - role: dubzland-nextcloud
+    - role: dubzland.nextcloud
 ```
 
 ## License
